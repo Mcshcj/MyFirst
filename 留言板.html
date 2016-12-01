@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>留言板</title>
+	<style>
+/*		#comm div{
+			border:1px solid red;
+		}*/
+		#pl{
+			width: 90%; 	
+			height: 90px;
+			font:20px '楷体';
+		}
+		.vip{
+			width: 90%;
+			word-wrap:break-word;
+			/*height: 60px;*/
+			border: 2px solid #eee;
+			margin:10px;
+			font:20px '楷体';
+			line-height: 60px;
+			float: left;
+		}
+		.tx{
+			float: left;
+			width: 5%;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<textarea name="" id="pl" cols="30" rows="10"></textarea>
+	<button type="button" onclick="chce()">发布留言</button>
+	<div id="comm"></div>
+
+
+	<script>
+		var arr = new Array();
+		var i=0;
+		var opl = document.getElementById('pl');
+		var ocomm = document.getElementById('comm');
+		function chce(){
+			if(opl.value==''){
+				alert('说点什么吧');
+			}else if(opl.value.length<2){
+				alert('多说点儿吧，至少2个字哦');
+			}else{
+				tj();
+				console.log('不为空');
+			}
+		}
+		function tj(){
+			// 得到评论区域和显示区域
+			
+			// 把得到的评论放放到数组中
+			arr[i]=opl.value;
+			// console.log(arr[i]);
+			i++;
+
+			ocomm.innerHTML = ' ';
+			// 开始输出到界面
+			for(var j =i-1;j>=0;j--){
+				var odiv =  document.createElement('div'); 
+				var oimg = document.createElement('img');
+				// 给img设置
+				oimg.setAttribute('src','w.png');
+				oimg.setAttribute('class','tx');
+				odiv.innerHTML= arr[j];
+				odiv.setAttribute('class','vip');
+				ocomm.appendChild(oimg);
+				ocomm.appendChild(odiv);
+				console.log(j)
+			}
+			// 重置留言框为空
+			opl.value = '';
+		}
+	</script>
+</body>
+</html>
